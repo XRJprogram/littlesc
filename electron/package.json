@@ -1,0 +1,63 @@
+{
+  "name": "littlesc-desktop",
+  "version": "1.0.0",
+  "description": "littlesc 桌面绿色版 — 开箱即用的 Windows 便携版",
+  "main": "main.mjs",
+  "author": "littlesc",
+  "license": "GPL-3.0",
+  "type": "module",
+  "scripts": {
+    "build:win": "electron-builder --win portable",
+    "dev": "electron .",
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.littlesc.desktop",
+    "productName": "littlesc",
+    "directories": {
+      "output": "release",
+      "buildResources": "resources"
+    },
+    "files": [
+      "main.mjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../build",
+        "to": "build",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "../backend-js",
+        "to": "backend-js",
+        "filter": [
+          "src/**/*",
+          "assets/**/*",
+          "package.json",
+          "package-lock.json"
+        ]
+      },
+      {
+        "from": "../backend-js/node_modules",
+        "to": "backend-js/node_modules",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "littlesc-${version}-portable.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

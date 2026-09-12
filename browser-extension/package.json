@@ -1,0 +1,34 @@
+{
+  "name": "browser-extension",
+  "version": "3.3.0",
+  "description": "InstanceScratch AI 侧边栏浏览器扩展：在 Turbowarp / Codingclip 编辑器中用自然语言 + 真实 AI 流式生成积木并注入当前角色。支持AI删改/替换积木、多轮对话、黑白模式。",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build-bundles.mjs",
+    "package": "node build-zip.mjs",
+    "test": "node tests/all.mjs",
+    "test:compile": "node tests/run_tests.mjs",
+    "test:runtime": "node tests/run_runtime.mjs",
+    "test:ai": "node tests/e2e_ai.mjs"
+  },
+  "keywords": [
+    "scratch",
+    "turbowarp",
+    "browser-extension",
+    "ai",
+    "sidepanel",
+    "deepseek"
+  ],
+  "author": "flx",
+  "license": "GPL-3.0",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "jszip": "^3.10.1",
+    "scratch-storage": "^4.0.0",
+    "scratch-vm": "^5.0.298"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.9.0"
+  }
+}

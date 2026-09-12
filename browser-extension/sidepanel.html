@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InstanceScratch AI</title>
+<link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+<div class="app">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <button class="icon-btn" id="conv-toggle" title="对话列表" aria-label="对话列表">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.5 3.5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6.8l-3.5 2.5a.75.75 0 0 1-1.3-.5V3.5Z"/></svg>
+      </button>
+      <div class="brand-text">
+        <h1>InstanceScratch</h1>
+        <p id="conv-title">新对话</p>
+      </div>
+      <button class="icon-btn" id="new-chat" title="新建对话" aria-label="新建对话">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 1.75a.75.75 0 0 1 .75.75v4.75h4.75a.75.75 0 0 1 0 1.5H8.75v4.75a.75.75 0 0 1-1.5 0V8.75H2.5a.75.75 0 0 1 0-1.5h4.75V2.5A.75.75 0 0 1 8 1.75Z"/></svg>
+      </button>
+      <button class="icon-btn" id="theme-toggle" title="切换黑白模式" aria-label="切换黑白模式">
+        <svg class="icon-moon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M14.53 10.53a7 7 0 0 1-9.06-9.06 7 7 0 1 0 9.06 9.06Z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0 1.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Zm0-9.75V1.5m0 13v-1.25M1.5 8h1.25m10.5 0h1.25M3.1 3.1l.88.88m8.04 8.04.88.88m0-9.8-.88.88M3.1 12.9l.88-.88"/></svg>
+      </button>
+      <button class="icon-btn" id="settings-btn" title="AI 设置" aria-label="AI 设置">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor"><path d="M8 10.25a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5Zm0-6a3.75 3.75 0 0 0-3.73 3.25H.75a.75.75 0 0 0 0 1.5h3.52A3.75 3.75 0 0 0 8 12.25a3.75 3.75 0 0 0 3.73-3.25h3.52a.75.75 0 0 0 0-1.5h-3.52A3.75 3.75 0 0 0 8 4.25Z"/></svg>
+      </button>
+    </div>
+    <!-- Provider status -->
+    <div class="provider-status" id="provider-status">
+      <span class="provider-dot" id="provider-dot"></span>
+      <span id="provider-name">未配置</span>
+    </div>
+  </header>
+
+  <!-- Conversation List Sidebar -->
+  <div class="conv-sidebar" id="conv-sidebar" hidden>
+    <div class="conv-header">
+      <span>对话记录</span>
+      <button class="icon-btn icon-sm" id="conv-close" title="关闭">✕</button>
+    </div>
+    <div class="conv-list" id="conv-list"></div>
+  </div>
+
+  <!-- Target status -->
+  <div class="target-bar">
+    <span class="target-label">目标</span>
+    <span class="target-name" id="target-name">未检测到编辑器</span>
+    <span class="target-dot" id="target-dot"></span>
+  </div>
+
+  <!-- Chat body -->
+  <main class="chat-body" id="chat-body"></main>
+
+  <!-- Composer -->
+  <footer class="composer">
+    <textarea id="prompt" rows="2" placeholder="描述你想要的积木效果…（Enter 发送，Shift+Enter 换行）"></textarea>
+    <button class="send-btn" id="send-btn" disabled>
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1.612a.75.75 0 0 1 1.062-.71l12 5.25a.75.75 0 0 1 0 1.363l-12 5.25a.75.75 0 0 1-1.03-1.02L5.48 8.5 1.782 2.255A.75.75 0 0 1 1.75 1.612Zm4.294 7.663L2.893 13.5l9.24-4.042-6.089-2.183Z"/></svg>
+    </button>
+  </footer>
+
+  <div class="status" id="status"></div>
+</div>
+
+<!-- Settings modal -->
+<div class="settings-overlay" id="settings-overlay" hidden>
+  <div class="settings-modal">
+    <div class="settings-modal-header">
+      <span>AI 设置</span>
+      <button class="icon-btn icon-sm" id="settings-close" title="关闭">✕</button>
+    </div>
+    <div class="settings-modal-body">
+      <label class="s-label">API 服务商</label>
+      <select id="provider">
+        <option value="deepseek">DeepSeek</option>
+        <option value="kimi">Moonshot</option>
+        <option value="agnes">Agnes</option>
+        <option value="openai">OpenAI</option>
+        <option value="custom">自定义</option>
+      </select>
+
+      <label class="s-label">Base URL</label>
+      <input id="base_url" placeholder="https://api.deepseek.com/v1">
+
+      <label class="s-label">API Key</label>
+      <input id="api_key" type="password" placeholder="sk-...">
+
+      <!-- Model selection section (hidden until API key confirmed) -->
+      <div id="model-section" hidden>
+        <label class="s-label">模型</label>
+        <select id="model-select">
+          <option value="">— 请选择模型 —</option>
+        </select>
+        <input id="model-custom" type="text" placeholder="或手动输入模型名称" style="display:none">
+      </div>
+
+      <div class="s-note" id="provider-note"></div>
+
+      <button class="s-save" id="save-settings">确认 API Key</button>
+      <button class="s-save" id="save-model" style="display:none">保存</button>
+      <div class="s-status" id="settings-status"></div>
+    </div>
+  </div>
+</div>
+
+<script src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+package-lock.json
+src/compiler-build/browser-shims.patched.js
+src/compiler-build/codegen.browser.js
+release/
+
+# 环境变量 / API 密钥（勿入库，参见 .env.example）
+.env
+.env.*
+!.env.example

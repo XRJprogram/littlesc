@@ -1,0 +1,59 @@
+# 仅 tag 推送时构建并发布 Release；普通 push 与 PR 不再触发构建。
+.x-install: &x-install
+  name: install-deps
+  script: |
+    apt-get update && apt-get install -y wine64 || true
+    npm install --force
+    cd backend-js && npm install
+    cd ../electron && npm install
+    cd ../browser-extension && npm install
+.x-frontend: &x-frontend
+  name: build-frontend
+  script: |
+    NODE_ENV=production npm run build
+.x-package: &x-package
+  name: package-portable
+  script: |
+    cd electron && npm run build:win
+.x-ext-build: &x-ext-build
+  name: build-browser-extension
+  script: |
+    cd browser-extension
+    npm run build       # 打包 compiler/injector/background
+    npm test            # 编译 + 结构 + 运行时（64 码）
+    npm run package     # 打包成可导入的 zip
+.x-release: &x-release
+  - name: publish-release
+    type: git:release
+    options:
+      tag: v3.3.0
+      title: InstanceScratch Windows 绿色版 + 浏览器侧边栏扩展
+      description: |
+        InstanceScratch 双形态产物，开箱即用。
+        1. Windows 绿色便携版：InstanceScratch-1.0.0-portable.exe
+        2. 浏览器侧边栏扩展：InstanceScratch-AI-v3.3.0.zip（Chrome/Edge 开发者模式直接导入）
+      latest: true
+  - name: upload-asset
+    image: cnbcool/attachments:latest
+    settings:
+      tag: v3.3.0
+      attachments:
+        - "./electron/release/*.exe"
+        - "./browser-extension/release/*.zip"
+
+# 普通 push 与 PR 不再触发构建（按用户需求）。
+# 仅 tag 推送（打 tag 发布 Release）时才执行构建与发布。
+
+$:
+  tag_push:
+    - name: build-and-release
+      runner:
+        cpus: 8
+      docker:
+        image: node:20
+      stages:
+        - *x-install
+        - *x-frontend
+        - *x-package
+        - *x-ext-build
+        - *x-release

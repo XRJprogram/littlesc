@@ -1,0 +1,71 @@
+{
+  "report": [
+    {
+      "id": "calc",
+      "name": "四则运算计算器",
+      "turns": [
+        {
+          "n": 1,
+          "prompt": "写一个四则运算计算器，包含词法分析、语法分析、求值三个阶段，全部包装成为函数",
+          "blocksBefore": 104,
+          "blocksAfter": 104,
+          "seconds": "84.5",
+          "shot": "calc-turn1.png"
+        },
+        {
+          "n": 2,
+          "prompt": "把入口改成用 ask 读取表达式，并且 say 的时候加上「结果=」前缀",
+          "blocksBefore": 104,
+          "blocksAfter": 459,
+          "seconds": "14.2",
+          "shot": "calc-turn2.png"
+        }
+      ]
+    },
+    {
+      "id": "json",
+      "name": "JSON 解析",
+      "turns": [
+        {
+          "n": 1,
+          "prompt": "写一个 JSON 解析，包装成为函数",
+          "blocksBefore": 104,
+          "blocksAfter": 223,
+          "seconds": "22.1",
+          "shot": "json-turn1.png"
+        },
+        {
+          "n": 2,
+          "prompt": "再加一个函数，支持取嵌套对象和数组下标，比如 a.b[0].c",
+          "blocksBefore": 104,
+          "blocksAfter": 330,
+          "seconds": "24.8",
+          "shot": "json-turn2.png"
+        }
+      ]
+    },
+    {
+      "id": "regex",
+      "name": "正则匹配",
+      "turns": [
+        {
+          "n": 1,
+          "prompt": "写一个正则匹配，包装成为函数，支持 * 和 . 和 ^，全部用自制积木包装",
+          "blocksBefore": 104,
+          "blocksAfter": 223,
+          "seconds": "14.0",
+          "shot": "regex-turn1.png"
+        },
+        {
+          "n": 2,
+          "prompt": "再加一个 + 量词的支持：匹配前一个字符一次或多次",
+          "blocksBefore": 104,
+          "blocksAfter": 330,
+          "seconds": "11.7",
+          "shot": "regex-turn2.png"
+        }
+      ]
+    }
+  ],
+  "problems": []
+}

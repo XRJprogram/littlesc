@@ -1,0 +1,41 @@
+# 依赖
+node_modules/
+
+# 环境变量 / API 密钥（勿入库，参见 backend-js/.env.example）
+.env
+.env.*
+!.env.example
+
+# 前端构建产物
+/build/
+/dist/
+
+# 后端测试产物（仅保留测试输入 fixture 与探针脚本）
+/backend-js/build/*
+!/backend-js/build/test-sb3/
+!/backend-js/build/scaledown/
+/backend-js/build/scaledown/*
+!/backend-js/build/scaledown/*.mjs
+
+# 日志
+*.log
+
+# 测试运行时生成的报告（backend-js/test/real_injection_test.js 写出）
+/backend-js/test_report.md
+
+# 缓存
+__pycache__/
+*.pyc
+.scale_verify_cache.json
+
+# 编辑器备份
+*.rootbak
+
+# 本地工具目录
+/.local/
+/.codebuddy/
+
+# Electron 构建产物
+/electron/node_modules/
+/electron/release/
+/electron/dist/

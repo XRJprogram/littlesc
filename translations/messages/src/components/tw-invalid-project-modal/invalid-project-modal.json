@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tw.invalidProject.title",
+    "description": "Title of modal that appears when a project could not be loaded",
+    "defaultMessage": "Error"
+  },
+  {
+    "id": "tw.invalidProject.error",
+    "description": "Part of modal that appears when a project could not be loaded. Followed by error message.",
+    "defaultMessage": "Could not load project:"
+  },
+  {
+    "id": "tw.invalidProject.zipCorruption",
+    "description": "Part of modal that appears when a project could not be loaded. {usingSb3fix} becomes a link 'using sb3fix to recover your project'. sb3fix refers to https://turbowarp.github.io/sb3fix/",
+    "defaultMessage": "This error often means that the file was corrupted, possibly due to a faulty storage device, power outage, or unplugging a USB drive without ejecting. Try {usingSb3fix} as it can fix this type of error."
+  },
+  {
+    "id": "tw.invalidProject.sb3fix",
+    "description": "Part of modal that appears when a project could not be loaded. Used in context 'Try using sb3fix to recover your project as it can fix this type of error'. sb3fix referes to https://turbowarp.github.io/sb3fix/",
+    "defaultMessage": "using sb3fix to recover your project"
+  },
+  {
+    "id": "tw.invalidProject.validationError",
+    "description": "Part of modal that appears when a project could not be loaded. {reportIt} becomes a link 'report it'.",
+    "defaultMessage": "This error often means that a small part of the project has been corrupted, but that it is otherwise valid. This can be easy to fix, so please {reportIt}."
+  },
+  {
+    "id": "tw.invalidProject.reportIt",
+    "description": "Part of modal that appears when a project could not be loaded. Used in context 'Please report this as this is ...'",
+    "defaultMessage": "report it"
+  },
+  {
+    "id": "tw.invalidProject.options",
+    "description": "Part of modal that appears when a project could not be loaded.",
+    "defaultMessage": "You may be able to recover an older version of the project from automatic restore points or other backups."
+  },
+  {
+    "id": "tw.invalidProject.restorePoints",
+    "description": "Part of modal that appears when a project could not be loaded. This is a button that opens the restore point menu.",
+    "defaultMessage": "View Restore Points"
+  }
+]
