@@ -200,7 +200,7 @@ npm run build:win
 ## 致谢与开源协议
 
 ### 特别致谢
-本项目是在 **[InstanceScratch](https://github.com/flxedu/InstanceScratch)** 项目的基础上深度演进与重构而来的。
+本项目是在 **[InstanceScratch](https://cnb.cool/flx.edu/InstanceScratch-js)** 项目的基础上深度演进与重构而来的。
 特别感谢 InstanceScratch 原作者团队在纯 Node.js goboscript ↔ SB3 双向高保真编译器内核、AST 解析映射与积木反序列化注入方案上所做的开创性工作，为本项目的实时代码比对与智能协同能力奠定了扎实可靠的底层基础。
 
 ### 开源协议
